@@ -4,11 +4,11 @@
       <div
         class="tab-bar-item {{ current == (index + 1) ? 'active' : '' }}"
         for="{{(index, item) in tabbar}}"
-        onclick="navigate(item.path)"
+        onclick="navigate(item, index)"
       >
         <image src="/assets/images/logo.png" class="icon"></image>
         <text class="tab-text">
-          {{ item.title }}{{ current }}
+          {{ item.title }}
         </text>
       </div>
     </tab-bar>
@@ -44,8 +44,11 @@ export default {
     ]
   },
   // 切换tabbar页面
-  navigate (path) {
-    $utils.replace(path)
+  navigate (item, index) {
+    // 当前tab
+    if (index + 1 == this.current) return
+    // 跳转
+    $utils.replace(item.path)
   }
 }
 </script>

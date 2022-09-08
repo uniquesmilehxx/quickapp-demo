@@ -4,13 +4,13 @@
 <template>
   <div class="tabpage">
     <!-- 自定义头部 -->
-    <titleBar show-left="{{ false }}" title="我的" current="3"></titleBar>
+    <titleBar show-left="{{ false }}" title="我的"></titleBar>
     <!-- 内容 -->
     <div class="content">
       <text>个人中心页面</text>
     </div>
     <!-- 自定义底部 -->
-    <tabBar></tabBar>
+    <tabBar current="3"></tabBar>
   </div>
 </template>
 

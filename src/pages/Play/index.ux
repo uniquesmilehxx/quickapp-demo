@@ -4,13 +4,13 @@
 <template>
   <div class="tabpage">
     <!-- 自定义头部 -->
-    <titleBar show-left="{{ false }}" title="追剧" current="2"></titleBar>
+    <titleBar show-left="{{ false }}" title="追剧"></titleBar>
     <!-- 内容 -->
     <div class="content">
       <text>追剧</text>
     </div>
     <!-- 自定义底部 -->
-    <tabBar></tabBar>
+    <tabBar current="2"></tabBar>
   </div>
 </template>
 
