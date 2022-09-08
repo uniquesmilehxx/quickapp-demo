@@ -1,0 +1,21 @@
+<import name="titleBar" src="../../components/TitleBar/index.ux"></import>
+<import name="sub" src="./component/sub.ux"></import>
+
+<template>
+  <div class="page">
+    <titleBar title="Refresh2组件使用示例"></titleBar>
+    <sub id="sub"></sub>
+  </div>
+</template>
+
+<script>
+export default {
+  onShow() {
+    this.$child('sub').pullDownRefresh()
+  },
+}
+</script>
+
+<style lang="less">
+  @import './../../assets/styles/style.less';
+</style>
