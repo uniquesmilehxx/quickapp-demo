@@ -3,7 +3,7 @@
   "name": "haixing",
   "versionName": "1.0.0",
   "versionCode": 1,
-  "minPlatformVersion": 1080,
+  "minPlatformVersion": 1090,
   "icon": "/assets/images/logo.png",
   "features": [
     {

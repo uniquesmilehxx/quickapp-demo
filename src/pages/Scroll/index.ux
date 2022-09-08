@@ -79,6 +79,9 @@ export default {
     setTimeout(() => {
       this.listData = this.listData.concat([{name: 'A'}, {name: 'B'}, {name: 'C'}, {name: 'D'}])
     })
+  },
+  onReachTop () {
+    console.log('触顶')
   }
 }
 </script>
