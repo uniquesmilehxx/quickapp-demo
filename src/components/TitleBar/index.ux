@@ -1,0 +1,123 @@
+<template>
+  <div class="ux-titleBar-wrap" style="height: {{ height }}; background-color:{{ backgroundColor }};">
+    <div class="ux-titleBar">
+    <!-- 左 -->
+      <div class="left-button" onclick="leftClicked" if="{{ showLeft }}">
+        <image if="{{ !leftText }}" src="{{ leftButton }}" class="left-icon"></image>
+        <text>{{ leftText }}</text>
+      </div>
+      <!-- 标题 -->
+      <text class="title" style="color:{{ textColor }};text-align:{{ textAlign }}" onclick="test">
+        {{ title }}
+      </text>
+      <!-- 右 -->
+      <div class="right-button" onclick="rightButtonClicked">
+        <image if="{{rightButton && !rightText}}" src="{{ rightButton }}" class="right-icon"></image>
+        <text style="color:{{ textColor }}">{{ rightText }}</text>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+  export default {
+    props: {
+      leftButton: {
+        default: '/components/TitleBar/images/arrow-left-1.png'
+      },
+      showLeft: {
+        default: true
+      },
+      leftText: {},
+      rightButton: {},
+      rightText: {},
+      title: {
+        default: 'title'
+      },
+      textAlign: {
+        default: 'center'
+      },
+      textColor: {
+        default: '#FFFFFF'
+      },
+      fontSize: {
+        default: '35px'
+      },
+      backgroundColor: {
+        default: '#0faeff'
+      },
+      // 是否走自定义的leftBack事件（若设置为false，需要传入onleft-clicked）
+      customLeftClick: {
+        default: false
+      },
+      // 是否走自定义的rightBack事件（若设置为false，需要传入onright-clicked）
+      customRightClick: {
+        default: false
+      },
+    },
+    data () {
+      return {
+        // 设备信息提供的状态栏高度不友好，这里直接写死
+        height: '150px'
+      }
+    },
+    leftClicked () {
+      if (this.customLeftClick) {
+        // 自定义左击
+        this.$emit('leftClicked')
+      } else {
+        // 默认左击
+        $utils.back()
+      }
+    },
+    rightButtonClicked () {
+      if (this.customRightClick) {
+        // 自定义左击
+        this.$emit('rightClicked')
+      } else {
+        // 默认左击
+        $utils.back()
+      }
+    },
+  }
+</script>
+
+<style lang="less">
+  .ux-titleBar-wrap {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    .ux-titleBar{
+      width: 100%;
+      padding: 0px 20px;
+      align-items: center;
+      height: 100px;
+      margin-top: 50px;
+      .left-icon {
+        height: 50px;
+        width: 50px;
+        object-fit: contain;
+      }
+      .left-button {
+        width: 80px;
+        justify-content: flex-start;
+      }
+      .right-button {
+        width: 80px;
+        justify-content: flex-end;
+      }
+      .title {
+        flex-grow: 1;
+        font-size: 35px;
+        text-align: center;
+      }
+      .right-icon {
+        height: 50px;
+        width: 50px;
+        object-fit: contain;
+      }
+    }
+  }
+</style>

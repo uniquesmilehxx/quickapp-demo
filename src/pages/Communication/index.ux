@@ -1,0 +1,58 @@
+<import name="com" src="../../components/ComDemo/index.ux"></import>
+<import name="titleBar" src="../../components/TitleBar/index.ux"></import>
+
+<template>
+  <div class="page">
+    <!-- 自定义头部 -->
+    <titleBar title="通信示例"></titleBar>
+    <!-- 内容 -->
+    <div class="content">
+      <input
+        class="btn"
+        type="button"
+        @click="comBroadcast"
+        value="点击向子组件传递数据"
+      />
+      <div style="margin-top: 20px">
+        <com say="props传递"></com>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import router from '@system.router'
+
+export default {
+  // 页面级组件的数据模型，影响传入数据的覆盖机制：private内定义的属性不允许被覆盖
+  private: {
+    title: '欢迎体验快应用开发',
+  },
+
+  onInit() {
+    // 监听子组件dispatch
+    this.$on('comDispatch', this.comDispatch)
+  },
+
+  // 跳转测试
+  onDetailBtnClick() {
+    $utils.push('/pages/DemoDetail')
+  },
+
+  // 子组件dispatch
+  comDispatch (evt) {
+    console.log('comDispatch------------', evt)
+  },
+
+  // 父组件调用子组件的事件，通过broadcast
+  comBroadcast () {
+    this.$broadcast('comBroadcast', {
+      data: '父组件传的数据'
+    })
+  }
+}
+</script>
+
+<style lang="less">
+  @import './../../assets/styles/style.less';
+</style>

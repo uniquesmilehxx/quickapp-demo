@@ -1,0 +1,25 @@
+<import name="titleBar" src="../../components/TitleBar/index.ux"></import>
+<import name="tabBar" src="../../components/TabBar/index.ux"></import>
+
+<template>
+  <div class="tabpage">
+    <!-- 自定义头部 -->
+    <titleBar show-left="{{ false }}" title="我的" current="3"></titleBar>
+    <!-- 内容 -->
+    <div class="content">
+      <text>个人中心页面</text>
+    </div>
+    <!-- 自定义底部 -->
+    <tabBar></tabBar>
+  </div>
+</template>
+
+<script>
+export default {
+}
+</script>
+
+<style lang="less">
+  @import './../../assets/styles/style.less';
+</style>
+

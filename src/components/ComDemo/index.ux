@@ -1,0 +1,43 @@
+<template>
+  <div class="wrapper" @click="clickEvt">
+    <text class="title">子组件区域——{{ say }}——{{ title }}</text>
+  </div>
+</template>
+
+<script>
+export default {
+  data: {
+    title: "子组件内部数据"
+  },
+  
+  props: ['say'],
+  
+  onInit() {
+    // 监听父组件broadcast
+    this.$on('comBroadcast', this.comBroadcast)
+  },
+
+  // 子组件调用父组件事件，通过dispatch
+  clickEvt () {
+    this.$dispatch('comDispatch')
+  },
+
+  // 父组件broadcast
+  comBroadcast (evt) {
+    this.title = evt.detail.data
+  }
+}
+</script>
+
+<style lang="less">
+.wrapper {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  .title {
+    text-align: center;
+    color: #212121;
+  }
+}
+
+</style>

@@ -1,0 +1,98 @@
+<import name="titleBar" src="../../components/TitleBar/index.ux"></import>
+
+<template>
+  <div class="page">
+    <titleBar title="滚动加载分页示例"></titleBar>
+    <!-- 列表实现 -->
+    <list class="tutorial-page" onscrollbottom="loadMoreData">
+      <!-- 列表 -->
+      <block for="listData">
+        <list-item type="product" class="content-item">
+          <text>{{ $item.name }}</text>
+        </list-item>
+      </block>
+      <!-- 加载更多，type属性自定义命名为loadMore -->
+      <list-item type="loadMore" class="load-more">
+        <progress type="circular"></progress>
+        <text>加载更多</text>
+      </list-item>
+    </list>
+  </div>
+</template>
+
+<script>
+export default {
+  data () {
+    return {
+      num: 50,
+      listData: [
+        { name: 'A' },
+        { name: 'B11111111' },
+        { name: 'C' },
+        { name: 'D' },
+        { name: 'A' },
+        { name: 'B' },
+        { name: 'C' },
+        { name: 'D' },
+        { name: 'A' },
+        { name: 'B' },
+        { name: 'C' },
+        { name: 'D' },
+        { name: 'A' },
+        { name: 'B' },
+        { name: 'C' },
+        { name: 'D' },
+        { name: 'A' },
+        { name: 'B' },
+        { name: 'C' },
+        { name: 'D' },
+        { name: 'A' },
+        { name: 'B' },
+        { name: 'C' },
+        { name: 'D' },
+        { name: 'A' },
+        { name: 'B' },
+        { name: 'C' },
+        { name: 'D' },
+        { name: 'A' },
+        { name: 'B' },
+        { name: 'C' },
+        { name: 'D' },
+        { name: 'A' },
+        { name: 'B' },
+        { name: 'C' },
+        { name: 'D' },
+        { name: 'A' },
+        { name: 'B' },
+        { name: 'C' },
+        { name: 'D' },
+        { name: 'A' },
+        { name: 'B' },
+        { name: 'C' },
+        { name: 'D' },
+      ]
+    }
+  },
+  loadMoreData () {
+    console.log('加载更多')
+    if (this.listData.length > 100) return
+    setTimeout(() => {
+      this.listData = this.listData.concat([{name: 'A'}, {name: 'B'}, {name: 'C'}, {name: 'D'}])
+    })
+  }
+}
+</script>
+
+<style lang="less">
+  @import './../../assets/styles/style.less';
+  .tutorial-page {
+    width: 100%;
+  }
+  .load-more {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    margin: 10px 0;
+  }
+</style>
+

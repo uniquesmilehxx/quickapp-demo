@@ -1,0 +1,76 @@
+<import name="titleBar" src="../../components/TitleBar/index.ux"></import>
+<import name="tabBar" src="../../components/TabBar/index.ux"></import>
+ 
+<template>
+  <div class="tabpage">
+    <!-- 自定义头部 -->
+    <titleBar show-left="{{ false }}" title="首页" current="1"></titleBar>
+    <!-- 内容 -->
+    <div class="content">
+      <!-- 滚动加载分页示例 -->
+      <input
+        class="btn"
+        type="button"
+        value="滚动加载分页示例"
+        onclick="navigate('/pages/Scroll')"
+      />
+      <!-- 通信示例 -->
+      <input
+        class="btn"
+        type="button"
+        @click="navigate('/pages/Communication')"
+        value="通信示例"
+      />
+      <!-- fetch请求示例 -->
+      <input
+        class="btn"
+        type="button"
+        @click="navigate('/pages/Fetch')"
+        value="fetch请求示例"
+      />
+    </div>
+    <!-- 自定义底部 -->
+    <tabBar></tabBar>
+  </div>
+</template>
+
+<script>
+import router from '@system.router'
+
+export default {
+  // 页面级组件的数据模型，影响传入数据的覆盖机制：private内定义的属性不允许被覆盖
+  private: {
+    title: '欢迎体验快应用开发',
+    
+  },
+
+  onInit() {
+    // --------------------------------- Optimize SEO Start
+    // 当 titlebar 的文案与搜索的标题不一致时，请先设置 titlebar
+    // 备注：this.$page.setMeta 需要引擎 1090 版本及以上才支持，因此这段做注释处理；
+    this.$page.setTitleBar({ text: '欢迎体验快应用开发' })
+    if (this.$page.setMeta) {
+      this.$page.setMeta({
+        title: '快应用示例模版',
+        description:
+          '快应用是移动互联网新型应用生态，与手机系统深度整合，为用户提供更加场景化的体验。具备传统APP完整的应用体验，但无需安装、即点即用。',
+      })
+    }
+    // --------------------------------- Optimize SEO End
+  },
+
+  // 跳转
+  navigate(url) {
+    $utils.push(url)
+  },
+
+  leftClicked () {
+    console.log('back')
+    $utils.back()
+  }
+}
+</script>
+
+<style lang="less">
+  @import './../../assets/styles/style.less';
+</style>

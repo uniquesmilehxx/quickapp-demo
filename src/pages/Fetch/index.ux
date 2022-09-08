@@ -1,0 +1,46 @@
+<import name="com" src="../../components/ComDemo/index.ux"></import>
+<import name="titleBar" src="../../components/TitleBar/index.ux"></import>
+
+<template>
+  <div class="page">
+    <!-- 自定义头部 -->
+    <titleBar title="Fetch请求示例"></titleBar>
+    <!-- 内容 -->
+    <div class="content">
+      <input
+        class="btn"
+        type="button"
+        @click="fetchStart"
+        value="点击测试Fetch请求"
+      />
+    </div>
+  </div>
+</template>
+
+<script>
+import router from '@system.router'
+
+export default {
+  // 页面级组件的数据模型，影响传入数据的覆盖机制：private内定义的属性不允许被覆盖
+  private: {
+    title: '欢迎体验快应用开发',
+  },
+
+  onInit() {
+    // 监听子组件dispatch
+    this.$on('comDispatch', this.comDispatch)
+  },
+  // 发起请求
+  fetchStart () {
+    $apis.login.userInfo().then(res => {
+      $utils.showToast('接口请求成功，请在控制台中查看')
+    }).catch(err => {
+      $utils.showToast('接口请求失败')
+    })
+  }
+}
+</script>
+
+<style lang="less">
+  @import './../../assets/styles/style.less';
+</style>

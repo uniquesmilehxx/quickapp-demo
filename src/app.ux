@@ -1,0 +1,50 @@
+<script>
+/**
+ * 应用级别的配置，供所有页面公用
+ */
+const $utils = require('./helper/utils').default
+const $apis = require('./helper/apis').default
+import storage from '@system.storage'
+
+/* @desc: 注入方法至全局 global,以便页面调用 */
+const hook2global = global.__proto__ || global
+hook2global.$utils = $utils
+hook2global.$apis = $apis
+
+
+// async/await支持（regenerator.js：仅用于注入类库函数，不允许存储页面组件等数据）
+const injectRef = Object.getPrototypeOf(global) || global
+// 注入regeneratorRuntime
+injectRef.regeneratorRuntime = require('@babel/runtime/regenerator')
+
+export default {
+  onCreate() {
+    // 绑定system
+    const $system = require('./helper/system').default
+    hook2global.$system = $system
+    // 首次进入，将 storage 中的数据更新到 cache
+    $system.reloadCache()
+
+    // 延迟做接口请求，避免 system 中数据未初始化完成
+    setTimeout(() => {
+      this.$def.login()
+    })
+  },
+  login() {
+    // 登录操作
+
+    // 存储token
+    $system.setCache({
+      key: 'token', 
+      value: 'bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvdGVzdC1hcGkuZmVlZHM2LmNvbVwvYXBpXC9sb2dpbl9jb2RlIiwiaWF0IjoxNjYyNDQ3MjM2LCJleHAiOjE2NjMwNTIwMzYsIm5iZiI6MTY2MjQ0NzIzNiwianRpIjoieElnbVZXemFiQmpLT1U5NCIsInN1YiI6NSwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.awC_j-DwzBFh1jPmcmyUQLg0LQt4fL-8Q7A0zcR3z_c'
+    })
+    $apis.login.userInfo().then(res => {
+      // 存储用户信息
+      $system.setCache({
+        key: 'userinfo', 
+        value: res.data
+      })
+    })
+  },
+}
+</script>
