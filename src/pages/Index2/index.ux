@@ -1,0 +1,48 @@
+<import name="titleBar" src="../../components/TitleBar/index.ux"></import>
+<import name="tabBar2" src="../../components/TabBar2/index.ux"></import>
+ 
+<template>
+  <div class="tabpage">
+    <!-- 自定义头部 -->
+    <titleBar show-left="{{ false }}" title="{{ title }}"></titleBar>
+    <tabs index="{{ index }}">
+      <tab-content>
+        <text>111111111111111111111111111111111111111111111111111111111111111111</text>
+        <text>2222222222222222222222222222222222222222222222222222222222222222222</text>
+        <text>33333333333333333333333333333333333333333333333333333333333333333333</text>
+      </tab-content>
+      <!-- 自定义底部 -->
+      <tabBar2 current="{{ index }}"></tabBar2>
+    </tabs>
+  </div>
+</template>
+
+<script>
+import router from '@system.router'
+
+export default {
+  // 页面级组件的数据模型，影响传入数据的覆盖机制：private内定义的属性不允许被覆盖
+  private: {
+    title: '首页',
+    index: 0
+  },
+
+  onInit() {
+    
+  },
+
+  // 跳转
+  navigate(url) {
+    $utils.push(url)
+  },
+
+  leftClicked () {
+    console.log('back')
+    $utils.back()
+  }
+}
+</script>
+
+<style lang="less">
+  @import './../../assets/styles/style.less';
+</style>

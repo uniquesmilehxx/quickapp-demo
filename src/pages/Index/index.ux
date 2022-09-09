@@ -35,6 +35,13 @@
         @click="navigate('/pages/Fetch')"
         value="fetch请求示例"
       />
+      <!-- 自定义底部优化版本：在一个页面中切换 -->
+      <input
+        class="btn"
+        type="button"
+        @click="navigate('/pages/Index2')"
+        value="自定义底部优化版本"
+      />
     </div>
     <!-- 自定义底部 -->
     <tabBar current="1"></tabBar>

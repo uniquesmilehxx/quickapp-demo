@@ -1,0 +1,80 @@
+<template>
+  <tab-bar class="tab-bar">
+    <div
+      class="tab-bar-item {{ current == (index + 1) ? 'active' : '' }}"
+      for="{{(index, item) in tabbar}}"
+    >
+      <image src="/assets/images/logo.png" class="icon"></image>
+      <text class="tab-text">
+        {{ item.title }} {{ current }}
+      </text>
+    </div>
+  </tab-bar>
+</template>
+
+<script>
+export default {
+  props: {
+    // 当前选中索引
+    current: {
+      default: '1'
+    }
+  },
+  data: {
+    // tabbar
+    tabbar: [
+      {
+        id: 1,
+        title: '首页',
+        path: 'pages/Index' 
+      },
+      {
+        id: 2,
+        title: '追剧',
+        path: 'pages/Play' 
+      },
+      {
+        id: 3,
+        title: '我的',
+        path: 'pages/My' 
+      }
+    ]
+  }
+}
+</script>
+
+<style lang="less">
+.tab-bar {
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  height: 120px;
+  background-color: #f5f5f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .tab-bar-item {
+    width: 100px;
+    height: 100px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .icon {
+      width: 40px;
+      height: 40px;
+    }
+    .tab-text {
+      font-size: 24px;
+      margin-top: 8px;
+    }
+  }
+  .active {
+    background-color: green;
+    .tab-text {
+      color: #fff;
+    }
+  }
+}
+</style>

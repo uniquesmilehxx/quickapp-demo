@@ -40,6 +40,9 @@
       "pages/Index": {
         "component": "index"
       },
+      "pages/Index2": {
+        "component": "index"
+      },
       "pages/Scroll": {
         "component": "index"
       },
